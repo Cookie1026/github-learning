@@ -1,0 +1,24 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4.2.2
+
+      - name: ファイル一覧を表示
+        run: ls -la
+
+      - name: README が存在するか確認
+        run: |
+          if [ -f README.md ]; then
+            echo "✓ README.md が存在します"
+          else
+            echo "✗ README.md が見つかりません"
+            exit 1
+          fi
